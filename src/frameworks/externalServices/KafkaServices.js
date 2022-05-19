@@ -23,7 +23,7 @@ module.exports = class KafkaServices {
     async notify(guiasActivas) {
         const admin = kafka.admin()
         
-        // remember to connect and disconnect when you are done
+        // remember to connect and disconnect when you are donee
         await admin.connect()
         await admin.createTopics({validateOnly: false,waitForLeaders: false,timeout: 5000,
             topics: [{topic: 'salidaGuias'}]
