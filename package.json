@@ -1,0 +1,51 @@
+{
+    "name": "cleanarc",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "lint": "eslint ./",
+        "start": "nodemon src/app.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@datalust/winston-seq": "^1.0.2",
+        "app-root-path": "^2.1.0",
+        "body-parser": "^1.18.3",
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.0",
+        "elasticsearch": "^15.4.1",
+        "express": "^4.16.4",
+        "joi": "^14.3.1",
+        "kafkajs": "^1.16.0",
+        "morgan": "^1.9.1",
+        "mysql2": "^2.3.3",
+        "nodemon": "^1.18.9",
+        "sequelize": "^6.18.0",
+        "swagger-jsdoc": "^6.2.1",
+        "swagger-ui-express": "^4.3.0",
+        "winston": "^3.2.1"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.13",
+        "@types/node": "^17.0.23",
+        "eslint": "^5.13.0",
+        "eslint-config-airbnb-base": "^13.1.0",
+        "eslint-plugin-import": "^2.16.0",
+        "ts-node": "^10.7.0",
+        "typescript": "^4.6.3"
+    },
+    "nodemonConfig": {
+        "restartable": "rs",
+        "ignore": [
+            "node_modules/**/node_modules"
+        ],
+        "delay": "2500",
+        "env": {
+            "NODE_ENV": "development",
+            "PORT": 4000
+        }
+    }
+}
