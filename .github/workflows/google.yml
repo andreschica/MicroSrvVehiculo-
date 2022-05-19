@@ -15,7 +15,7 @@ env:
   GKE_CLUSTER: envia-cluster-1    # Add your cluster name here.
   GKE_ZONE: us-central1   # Add your cluster zone here.
   DEPLOYMENT_NAME: envia-web # Add your deployment name here.
-  IMAGE: static-site
+  IMAGE: msvehiculos
 
 jobs:
   setup-build-publish-deploy:
