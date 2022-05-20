@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: micro-srv-vehiculo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: micro-srv-vehiculo
+  template:
+    metadata:
+      labels:
+        app: micro-srv-vehiculo
+    spec:
+      containers:
+      - image: gcr.io/august-creek-346600/micro-srv-vehiculo:latest
+        name: app
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: micro-srv-vehiculo
+spec:
+  ports:
+  - name: http
+    port: 8080
+  selector:
+    app: micro-srv-vehiculo
