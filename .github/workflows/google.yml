@@ -20,7 +20,6 @@ env:
   GKE_ZONE: us-central1   # Add your cluster zone here.
   DEPLOYMENT_NAME: micro-srv-vehiculo # Add your deployment name here.
   IMAGE: micro-srv-vehiculo
-
 jobs:
   setup-build-publish-deploy:
     name: Setup, Build, Publish, and Deploy
