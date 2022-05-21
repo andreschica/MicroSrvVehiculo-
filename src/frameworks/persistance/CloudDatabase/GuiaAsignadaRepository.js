@@ -52,13 +52,16 @@ module.exports = (GuiaAsignada) => {
 
         async asignarPorRuta(idGuia,idVehiculo) {
             try{
-                let guiaAsignada = {
-                    Id: idGuia,
-                    FechaAsignacion: new Date(),
-                    IdVehiculo: idVehiculo,
-                    IdEstadoAsignacion: 1
+                const guiaExistente = await GuiaAsignada.findOne({ where: { Id: idGuia } });
+                if(!guiaExistente){
+                    let guiaAsignada = {
+                        Id: idGuia,
+                        FechaAsignacion: new Date(),
+                        IdVehiculo: idVehiculo,
+                        IdEstadoAsignacion: 1
+                    }
+                    await GuiaAsignada.create(guiaAsignada);
                 }
-                await GuiaAsignada.create(guiaAsignada);
             }catch(e){
                 throw new Error(e);
             }

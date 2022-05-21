@@ -24,16 +24,15 @@ module.exports = class KafkaServices {
         const admin = kafka.admin()
         
         // remember to connect and disconnect when you are done
-        await admin.connect()
-        await admin.createTopics({validateOnly: false,waitForLeaders: false,timeout: 5000,
-            topics: [{topic: 'salidaGuias'}]
-        })
-        await admin.disconnect();
+        // await admin.connect()
+        // await admin.createTopics({validateOnly: false,waitForLeaders: false,timeout: 5000,
+        //     topics: [{topic: 'salidaGuias'}]
+        // })
+        // await admin.disconnect();
 
         const idGuias = guiasActivas.map(x=>x.Id)
         const producer = kafka.producer();
         await producer.connect();
-        console.log(idGuias);
         await producer.send({topic: 'salidaGuias',messages: [{ value: JSON.stringify(idGuias)}]});
         await producer.disconnect();
     }
@@ -58,9 +57,10 @@ module.exports = class KafkaServices {
         
         await consumer.run({
             eachMessage: async ({ message  }) => {
+                // console.log(JSON.parse(message.value.toString()).assigned_route);
                 const vehiculoDeRuta = await vehiculoRepository.obtenerPorRuta(JSON.parse(message.value.toString()).assigned_route);
                 await guiaAsignadaRepository.asignarPorRuta(JSON.parse(message.value.toString()).id,vehiculoDeRuta.id);
-                await vehiculoRepository(vehiculoDeRuta,2);
+                await vehiculoRepository.actualizarEstado(vehiculoDeRuta,2);
             },
         })
     }

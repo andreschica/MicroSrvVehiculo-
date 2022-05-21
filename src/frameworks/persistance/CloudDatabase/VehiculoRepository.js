@@ -76,7 +76,8 @@ module.exports = (Vehiculo) => {
         async obtenerPorRuta(idRuta) {
             try{
                 const vehiculoExistente = await Vehiculo.findOne({ where: { RutaDefinida: idRuta } });
-                return vehiculoExistente.dataValues;
+                const vehiculo = await Vehiculo.findOne({ where: { Id: vehiculoExistente.dataValues.id } });
+                return vehiculo;//vehiculoExistente.dataValues;
             }catch(e){
                 throw new Error(e);
             }
