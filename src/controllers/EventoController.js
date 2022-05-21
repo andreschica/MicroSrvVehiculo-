@@ -22,7 +22,8 @@ module.exports = (dependecies) => {
 
     const packageDelivery = async (req, res, next) => {
         try{
-            // inicializa caso de uso
+            // inicializa caso de 
+            console.log("incia salida vehiculo");
             const PackageDeliveryCommand = PackageDelivery(eventoRepository,guiaAsignadaRepository,vehiculoRepository,KafkaService);
             const { dateTime,notes,idVehicle } = req.body;
             // llama al caso de uso
