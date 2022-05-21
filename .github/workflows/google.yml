@@ -12,11 +12,11 @@ name: Build and Deploy to GKE
 on:
   push:
     branches:
-      - master
+      - ${{ secrets.GKE_ENV }}
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER: envia-cluster-1    # Add your cluster name here.
+  GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}    # Add your cluster name here. envia-cluster-1
   GKE_ZONE: us-central1   # Add your cluster zone here.
   DEPLOYMENT_NAME: micro-srv-vehiculo # Add your deployment name here.
   IMAGE: micro-srv-vehiculo
@@ -24,7 +24,7 @@ jobs:
   setup-build-publish-deploy:
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
-    environment: master
+    environment: ${{ secrets.GKE_ENV }}
 
     steps:
     - name: Checkout
