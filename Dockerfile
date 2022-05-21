@@ -12,8 +12,8 @@ RUN npm install
 ENV API_URL=http://api.myapp.com/
 ENV LOG_LEVEL=debug
 #Mysqlconfig
-ENV HOST=34.148.36.38
-ENV USERDB=root
+ENV HOST=dbvehicles.mysql.database.azure.com
+ENV USERDB=vehiculos@dbvehicles
 ENV PASSWORDDB=s64uDzmdb9rNoMPI
 ENV DB=Vehiculos
 ENV DIALECT=mysql
