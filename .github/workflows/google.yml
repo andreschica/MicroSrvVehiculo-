@@ -12,6 +12,7 @@ name: Build and Deploy to GKE
 on:
   push:
     branches:
+      - develop
       - master
 
 env:
@@ -24,7 +25,7 @@ jobs:
   setup-build-publish-deploy:
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
-    environment: master
+    environment: ${{ secrets.GKE_ENV }}
 
     steps:
     - name: Checkout
