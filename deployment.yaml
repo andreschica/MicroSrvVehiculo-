@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: micro-srv-vehiculo
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: micro-srv-vehiculo
