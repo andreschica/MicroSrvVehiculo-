@@ -8,7 +8,6 @@ module.exports = (EventoRepository,VehiculoRepository) => {
         // Crea nuevo objeto de vehiculo
         let nuevoEvento = new Evento(fechaHora,tipoEvento,notas,idVehiculo);
         // persiste vehiculo
-        console.log(nuevoEvento);
         nuevoEvento = await EventoRepository.add(nuevoEvento);
         let vehiculo = await VehiculoRepository.obtenerPorId(idVehiculo);
         await VehiculoRepository.actualizarEstado(vehiculo,tipoEvento);
