@@ -13,6 +13,9 @@ const apiRouter = (dependencies) => {
     routes.use('/vehicles', vehiculoRouter);
     routes.use('/assignedGuides', guiasAdignadasRouter);
     routes.use('/event', eventoRouter);
+    routes.get('/', (request, response) =>{
+        response.send('Ok')
+    });
     return routes;
 
 };
