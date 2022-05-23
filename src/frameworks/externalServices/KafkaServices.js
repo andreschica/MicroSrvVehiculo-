@@ -56,9 +56,13 @@ module.exports = class KafkaServices {
         
         await consumer.run({
             eachMessage: async ({ message  }) => {
+                try{
                     const vehiculoDeRuta = await vehiculoRepository.obtenerPorRuta(JSON.parse(message.value.toString()).assigned_route);
                     await guiaAsignadaRepository.asignarPorRuta(JSON.parse(message.value.toString()).id,vehiculoDeRuta.id);
                     await vehiculoRepository.actualizarEstado(vehiculoDeRuta,2);
+                }catch(ex){
+                    console.log(ex);
+                }
             },
         })
     }
