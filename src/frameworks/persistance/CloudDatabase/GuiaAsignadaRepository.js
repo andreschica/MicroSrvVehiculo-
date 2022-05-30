@@ -40,6 +40,19 @@ module.exports = (GuiaAsignada) => {
                 throw new Error(e);
             }
         }
+
+        async contarGuiasVehiculo(idVehicle) {
+            try{
+                const cuenta = await GuiaAsignada.count({
+                    where:{IdVehiculo:idVehicle,IdEstadoAsignacion:1},
+                    distinct: 'id'
+                  })
+                return cuenta;
+            }catch(e){
+                throw new Error(e);
+            }
+        }
+        
         
         async establecerGuiasSalida(idVehicle) {
             try{

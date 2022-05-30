@@ -50,10 +50,14 @@ module.exports = (Vehiculo) => {
             }
         }
 
-        async actualizarEstado(vehiculo,nuevoEstado) {
+        async actualizarEstado(vehiculo,nuevoEstado,t) {
             try{
                 vehiculo.EstadoVehiculo = nuevoEstado;
-                await vehiculo.save();
+                if(t){
+                    await vehiculo.save({ transaction: t });
+                }else{
+                    await vehiculo.save();
+                }
                 return vehiculo;
             }catch(e){
                 throw new Error(e);

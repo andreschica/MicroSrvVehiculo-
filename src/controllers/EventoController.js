@@ -5,11 +5,12 @@ module.exports = (dependecies) => {
     const { eventoRepository } = dependecies.DatabaseService;
     const { guiaAsignadaRepository } = dependecies.DatabaseService;
     const { vehiculoRepository } = dependecies.DatabaseService;
+    const { sequelize } = dependecies.DatabaseService;
     const KafkaService  = dependecies.KafkaService;
 
     const agregarEvento = (req, res, next) => {
         // inicializa caso de uso
-        const AgregarEventoCommand = AgregarEvento(eventoRepository,vehiculoRepository);
+        const AgregarEventoCommand = AgregarEvento(eventoRepository,vehiculoRepository,sequelize);
         // extrae propiedades de vehiculo
         const { dateTime,eventTipe,notes,idVehicle } = req.body;
         // llama al caso de uso

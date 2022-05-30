@@ -2,6 +2,7 @@
 const AgregarGuias = require('../application/use_cases/GuiasAsignadas/AgregarGuias');
 const ActualizarEstadoAsignacion = require('../application/use_cases/GuiasAsignadas/ActualizarEstadoAsignacion');
 const ListarGuiasVehiculo = require('../application/use_cases/GuiasAsignadas/ListarGuiasVehiculo');
+const ContarGuiasVehiculo = require('../application/use_cases/GuiasAsignadas/ContarGuiasVehiculo');
 
 module.exports = (dependecies) => {
     const { guiaAsignadaRepository } = dependecies.DatabaseService;
@@ -41,9 +42,22 @@ module.exports = (dependecies) => {
         });
     };
 
+    const contarGuiasVehiculo = (req, res, next) => {
+        const ContarGuiasVehiculoCommand = ContarGuiasVehiculo(guiaAsignadaRepository);
+        const idVehicle = req.params.idVehicle;
+        // llama al caso de uso
+        ContarGuiasVehiculoCommand.Execute(idVehicle).then((response) => {
+            res.json(response);
+        }, (err) => {
+            next(err);
+        });
+    };
+    
+
     return {
         agregarNuevaAsignacion,
         actualizarEstadoAsignacion,
-        obtenerGuiasVehiculo
+        obtenerGuiasVehiculo,
+        contarGuiasVehiculo
     };
 };

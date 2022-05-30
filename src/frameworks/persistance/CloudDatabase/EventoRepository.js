@@ -5,9 +5,13 @@ module.exports = (Evento) => {
     return class EventoRepository {
         constructor() { }
 
-        async add(instanciaEvento) {
+        async add(instanciaEvento,t) {
             try{
-                await Evento.create(instanciaEvento);
+                if(t){
+                    await Evento.create(instanciaEvento, { transaction: t });
+                }else{
+                    await Evento.create(instanciaEvento);
+                }
             }catch(e){
                 throw new Error(e);
             }

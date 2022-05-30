@@ -88,6 +88,9 @@ const guiaAsignadaRouter = (dependencies) => {
     router.route('/:idVehicle')
         .get(controller.obtenerGuiasVehiculo);
 
+    router.route('/count/:idVehicle')
+        .get(controller.contarGuiasVehiculo);
+
     return router;
 };
 

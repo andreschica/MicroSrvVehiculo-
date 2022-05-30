@@ -31,6 +31,7 @@ module.exports = class DatabaseServices {
         this.vehiculoRepository = new VehiculoRepository();
         this.guiaAsignadaRepository = new GuiaAsignadaRepository();
         this.eventoRepository = new EventoRepository();
+        this.sequelize = sequelize;
     }
 
     async initDatabase() {
