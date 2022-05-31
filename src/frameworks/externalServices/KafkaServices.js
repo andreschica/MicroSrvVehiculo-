@@ -19,24 +19,24 @@ const { Kafka } = require('kafkajs')
   })
 
   const producer = kafka.producer();
-  await producer.connect();
 
 module.exports = class KafkaServices {
 
     async notify(guiasActivas) {
-
+        await producer.connect();
         const idGuias = guiasActivas.map(x=>x.Id)
         await producer.send({topic: 'salidaGuias',messages: [{ value: JSON.stringify(idGuias)}]});
-        // await producer.disconnect();
+        await producer.disconnect();
     }
 
     consumeGuiasEntregadas = async (guiaAsignadaRepository)=> {
-        const consumer = kafka.consumer({ groupId: 'jevv' });
+        const consumer = kafka.consumer({ groupId: 'jevvv' });
         await consumer.connect()
         await consumer.subscribe({ topic:'guide-updated', fromBeginning: true });
         
         await consumer.run({
             eachMessage: async ({ message  }) => {
+                console.log(JSON.parse(message.value.toString()));
                 var guia = await guiaAsignadaRepository.obtenerPorId(JSON.parse(message.value.toString()).id);
                 await guiaAsignadaRepository.actualizarEstado(guia,JSON.parse(message.value.toString()).status);
             },
