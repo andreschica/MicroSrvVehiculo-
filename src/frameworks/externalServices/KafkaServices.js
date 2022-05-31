@@ -18,22 +18,16 @@ const { Kafka } = require('kafkajs')
     }
   })
 
+  const producer = kafka.producer();
+  await producer.connect();
+
 module.exports = class KafkaServices {
 
     async notify(guiasActivas) {
-        // const admin = kafka.admin()
-        // remember to connect and disconnect when you are done
-        // await admin.connect()
-        // await admin.createTopics({validateOnly: false,waitForLeaders: false,timeout: 5000,
-        //     topics: [{topic: 'salidaGuias'}]
-        // })
-        // await admin.disconnect();
 
         const idGuias = guiasActivas.map(x=>x.Id)
-        const producer = kafka.producer();
-        await producer.connect();
         await producer.send({topic: 'salidaGuias',messages: [{ value: JSON.stringify(idGuias)}]});
-        await producer.disconnect();
+        // await producer.disconnect();
     }
 
     consumeGuiasEntregadas = async (guiaAsignadaRepository)=> {
