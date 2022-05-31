@@ -30,15 +30,21 @@ module.exports = class KafkaServices {
     }
 
     consumeGuiasEntregadas = async (guiaAsignadaRepository)=> {
-        const consumer = kafka.consumer({ groupId: 'jevvv' });
+        const consumer = kafka.consumer({ groupId: 'jevv' });
         await consumer.connect()
         await consumer.subscribe({ topic:'guide-updated', fromBeginning: true });
         
         await consumer.run({
             eachMessage: async ({ message  }) => {
-                console.log(JSON.parse(message.value.toString()));
-                var guia = await guiaAsignadaRepository.obtenerPorId(JSON.parse(message.value.toString()).id);
-                await guiaAsignadaRepository.actualizarEstado(guia,JSON.parse(message.value.toString()).status);
+                try{
+                    var guia = await guiaAsignadaRepository.obtenerPorId(JSON.parse(message.value.toString()).id);
+                    // console.log(guia);
+                    // console.log(JSON.parse(message.value.toString()).id);
+                    if(guia)
+                    await guiaAsignadaRepository.actualizarEstado(guia,JSON.parse(message.value.toString()).status);
+                }catch(ex){
+                    console.log(ex);
+                }
             },
         })
     }
