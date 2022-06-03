@@ -32,9 +32,15 @@ module.exports = (GuiaAsignada) => {
             }
         }
         
-        async obtenerGuiasActivasVehiculo(idVehicle) {
+        async obtenerGuiasActivasVehiculo(idVehicle,unaSola) {
             try{
-                const guiasASalir = await GuiaAsignada.findAll({where:{IdVehiculo:idVehicle,IdEstadoAsignacion:1}});
+                let guiasASalir;
+                if(unaSola){
+                    guiasASalir = await GuiaAsignada.findOne({where:{IdVehiculo:idVehicle,IdEstadoAsignacion:1}});
+                    guiasASalir = guiasASalir ?? [];
+                }else{
+                    guiasASalir = await GuiaAsignada.findAll({where:{IdVehiculo:idVehicle,IdEstadoAsignacion:1}});
+                }
                 return guiasASalir;
             }catch(e){
                 throw new Error(e);

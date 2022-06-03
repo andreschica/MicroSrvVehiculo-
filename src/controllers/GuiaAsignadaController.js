@@ -35,7 +35,7 @@ module.exports = (dependecies) => {
         const ListarGuiasVehiculoCommand = ListarGuiasVehiculo(guiaAsignadaRepository);
         const idVehicle = req.params.idVehicle;
         // llama al caso de uso
-        ListarGuiasVehiculoCommand.Execute(idVehicle).then((response) => {
+        ListarGuiasVehiculoCommand.Execute(idVehicle,false).then((response) => {
             res.json(response);
         }, (err) => {
             next(err);
@@ -52,12 +52,24 @@ module.exports = (dependecies) => {
             next(err);
         });
     };
+
+    const obtenerGuiasPVehiculo = (req, res, next) => {
+        const ListarGuiasVehiculoCommand = ListarGuiasVehiculo(guiaAsignadaRepository);
+        const idVehicle = req.params.idVehicle;
+        // llama al caso de uso
+        ListarGuiasVehiculoCommand.Execute(idVehicle,true).then((response) => {
+            res.json(response);
+        }, (err) => {
+            next(err);
+        });
+    };
     
 
     return {
         agregarNuevaAsignacion,
         actualizarEstadoAsignacion,
         obtenerGuiasVehiculo,
-        contarGuiasVehiculo
+        contarGuiasVehiculo,
+        obtenerGuiasPVehiculo
     };
 };

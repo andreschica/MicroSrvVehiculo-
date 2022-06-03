@@ -3,8 +3,8 @@ const Evento = EventoClass();
 
 module.exports = (GuiasAsignadasRepository) => {
 
-    async function Execute(idVehicle) {
-        const guiasActivas = await GuiasAsignadasRepository.obtenerGuiasActivasVehiculo(idVehicle);
+    async function Execute(idVehicle,unaSola) {
+        const guiasActivas = await GuiasAsignadasRepository.obtenerGuiasActivasVehiculo(idVehicle,unaSola);
         return guiasActivas; 
     }
     return {

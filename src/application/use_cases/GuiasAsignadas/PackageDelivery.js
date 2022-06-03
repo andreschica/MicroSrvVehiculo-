@@ -10,7 +10,7 @@ module.exports = (EventoRepository,GuiasAsignadasRepository,VehiculoRepository,K
         let vehiculo = await VehiculoRepository.obtenerPorId(idVehicle);
         VehiculoRepository.actualizarEstado(vehiculo,tipoEvento);
         
-        const guiasActivas = await GuiasAsignadasRepository.obtenerGuiasActivasVehiculo(idVehicle);
+        const guiasActivas = await GuiasAsignadasRepository.obtenerGuiasActivasVehiculo(idVehicle,false);
         await KafkaService.notify(guiasActivas);
 
         return 'Salida de vehiculo con éxito'; //Mirar otra respuesta
